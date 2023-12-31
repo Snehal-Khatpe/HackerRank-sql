@@ -39,3 +39,35 @@ WHERE author_id = viewer_id
 ORDER BY id ASC
 
 
+==================================== Problem 3 ==================================
+Write a solution to find the IDs of the invalid tweets.
+The tweet is invalid if the number of characters used in the content of the tweet is strictly greater than 15.
+
+###  Write your MySQL query statement below  ###
+SELECT tweet_id FROM tweets
+WHERE LENGTH(content) > 15
+
+
+============================== Problem 4 =======================================
+/* Write a solution to report the movies with an odd-numbered ID and a description that is not "boring".
+Return the result table ordered by rating in descending order.
+The result format is in the following example.
+Example 1:
+Cinema table:
++----+------------+-------------+--------+
+| id | movie      | description | rating |
++----+------------+-------------+--------+
+| 1  | War        | great 3D    | 8.9    |
+| 2  | Science    | fiction     | 8.5    |
+| 3  | irish      | boring      | 6.2    |
+| 4  | Ice song   | Fantacy     | 8.6    |
+| 5  | House card | Interesting | 9.1    |
++----+------------+-------------+--------+
+*/
+
+###  Write your MySQL query statement below  ###
+SELECT id, movie, description, rating 
+FROM Cinema
+WHERE id%2 != 0 AND description != "boring"
+ORDER BY rating DESC
+
