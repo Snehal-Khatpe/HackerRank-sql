@@ -71,3 +71,15 @@ FROM Cinema
 WHERE id%2 != 0 AND description != "boring"
 ORDER BY rating DESC
 
+
+============================ Problem 5 ==============================
+/* Write a solution to find the IDs of the invalid tweets. 
+The tweet is invalid if the number of characters used in the content of the tweet is strictly greater than 15. */
+
+### Write your MySQL query statement below ###
+SELECT tweet_id FROM tweets
+WHERE LENGTH(content) > 15
+
+======================== Problem 6 ==================================
+
+
