@@ -1,0 +1,16 @@
+/*
+Leetcode #1251
+Write a solution to find the average selling price for each product. average_price should be rounded to 2 decimal places.
+
+*/
+
+
+
+#### Mysql solution ####
+
+SELECT p.product_id, ROUND(SUM(units*price)/SUM(units),2) average_price
+FROM prices p
+LEFT JOIN unitssold u
+ON p.product_id = u.product_id
+WHERE u.purchase_date BETWEEN p.start_date AND p.end_date
+GROUP BY p.product_id
