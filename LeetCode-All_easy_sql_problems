@@ -1,3 +1,60 @@
+=============================== Problem 619 Biggest Single Number ==============================
+# Write your MySQL query statement below
+WITH CTE AS(
+
+SELECT num,
+       COUNT(num) 
+FROM mynumbers
+GROUP BY num
+HAVING COUNT(num) = 1
+ORDER BY num DESC
+)
+
+SELECT MAX(num) AS num 
+FROM CTE
+
+=============================== Problem 627 Swap Salary ==============================
+# Write your MySQL query statement below
+/* Write a solution to swap all 'f' and 'm' values (i.e.,
+change all 'f' values to 'm' and vice versa) with a single update statement and no intermediate temporary tables. */
+
+
+UPDATE Salary
+SET sex = IF(sex = 'f', 'm', 'f');
+
+=============================== 1179. Reformat Department Table ==============================
+
+/* Reformat the table such that there is a department id column and a revenue column for each month.
+
+Return the result table in any order. */
+
+# Write your MySQL query statement below
+
+SELECT id,
+       MAX(CASE WHEN month = 'Jan' THEN revenue END )AS 'Jan_Revenue',
+       MAX(CASE WHEN month = 'Feb' THEN revenue END )AS 'Feb_Revenue',
+       MAX(CASE WHEN month = 'Mar' THEN revenue END )AS 'Mar_Revenue',
+       MAX(CASE WHEN month = 'Apr' THEN revenue END )AS 'Apr_Revenue',
+       MAX(CASE WHEN month = 'May' THEN revenue END )AS 'May_Revenue',
+       MAX(CASE WHEN month = 'Jun' THEN revenue END )AS 'Jun_Revenue',
+       MAX(CASE WHEN month = 'Jul' THEN revenue END )AS 'Jul_Revenue',
+       MAX(CASE WHEN month = 'Aug' THEN revenue END )AS 'Aug_Revenue',
+       MAX(CASE WHEN month = 'Sep' THEN revenue END )AS 'Sep_Revenue',
+       MAX(CASE WHEN month = 'Oct' THEN revenue END )AS 'Oct_Revenue',
+       MAX(CASE WHEN month = 'Nov' THEN revenue END )AS 'Nov_Revenue',
+       MAX(CASE WHEN month = 'Dec' THEN revenue END )AS 'Dec_Revenue'
+FROM department
+GROUP BY id
+
+=============================== 1873. Calculate Special Bonus ==============================
+
+
+# Write your MySQL query statement below
+SELECT employee_id,
+       IF(employee_id % 2 != 0 AND UPPER(LEFT(name,1)) != 'M', salary, 0) AS bonus
+FROM employees
+ORDER BY employee_id
+
 =============================== Problem 1 ==============================
 /* product_id is the primary key (column with unique values) for this table.
 low_fats is an ENUM (category) of type ('Y', 'N') where 'Y' means this product is low fat and 'N' means it is not.
