@@ -23,6 +23,7 @@ UPDATE Salary
 SET sex = IF(sex = 'f', 'm', 'f');
 
 =============================== 1179. Reformat Department Table ==============================
+##################### PIVOT ###########################
 
 /* Reformat the table such that there is a department id column and a revenue column for each month.
 
@@ -45,6 +46,31 @@ SELECT id,
        MAX(CASE WHEN month = 'Dec' THEN revenue END )AS 'Dec_Revenue'
 FROM department
 GROUP BY id
+
+=============================== 1795. Rearrange Products Table ==============================
+##################### UNPIVOT ###########################
+
+# Write your MySQL query statement below
+SELECT product_id,
+       'store1' AS store, store1 AS price
+FROM products
+WHERE store1 IS NOT NULL
+
+UNION ALL
+
+SELECT product_id,
+       'store2' AS store, store2 AS price
+FROM products
+WHERE store2 IS NOT NULL
+
+UNION ALL
+
+SELECT product_id,
+       'store3' AS store, store3 AS price
+FROM products
+WHERE store3 IS NOT NULL
+
+
 
 =============================== 1873. Calculate Special Bonus ==============================
 
