@@ -1,0 +1,30 @@
+=================== 176. Second Highest Salary ================================
+
+/* Write a solution to find the second highest salary from the Employee table. 
+If there is no second highest salary, return null (return None in Pandas). */
+
+WITH CTE AS(
+SELECT *,
+       DENSE_RANK() OVER( ORDER BY salary DESC) AS row_num
+FROM employee)
+
+SELECT MAX(salary) AS SecondHighestSalary FROM cte
+WHERE row_num=2
+
+
+====================== 177. Nth Highest Salary ====================================
+
+CREATE FUNCTION getNthHighestSalary(N INT) RETURNS INT
+BEGIN
+RETURN (
+-- Write your MySQL query statement below.
+
+WITH CTE AS(
+SELECT *, DENSE_RANK() OVER(ORDER BY salary DESC) AS r 
+FROM employee)
+
+SELECT DISTINCT IFNULL(salary, 'null') FROM cte 
+WHERE r = N
+
+ );
+END
