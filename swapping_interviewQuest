@@ -1,0 +1,17 @@
+/*
+If the last item has an odd order ID, it should remain as the last item in the corrected data. For example, 
+if the last item is Order ID 7 Tandoori Chicken, then it should remain as Order ID 7 in the corrected data.
+
+In the results, return the correct pairs of order IDs and items.
+*/
+
+######### My solution is as below ################ 
+ SELECT 
+        CASE WHEN order_id%2 != 0 AND order_id = (SELECT MAX(order_id) FROM orders) THEN order_id
+             WHEN order_id%2 != 0 AND order_id != (SELECT MAX(order_id) FROM orders) THEN order_id+1
+             ELSE order_id-1
+        END AS test,
+        item
+FROM orders
+ORDER BY test
+
