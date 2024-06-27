@@ -1,0 +1,32 @@
+/*
+For each FAANG stock, display the ticker symbol, the month and year ('Mon-YYYY') with the corresponding highest and lowest open prices (refer to the Example Output format). 
+Ensure that the results are sorted by ticker symbo
+*/
+
+####### My Solution is as below ########
+
+WITH open_max AS(
+SELECT ticker,
+       TO_CHAR(date, 'Mon-YYYY') AS highest_mth,
+       open,
+       DENSE_RANK() OVER(PARTITION BY ticker ORDER BY open DESC) r1
+FROM stock_prices
+), 
+
+open_min AS (
+SELECT ticker,
+       TO_CHAR(date, 'Mon-YYYY') AS lowest_mth,
+       open,
+       DENSE_RANK() OVER(PARTITION BY ticker ORDER BY open ASC) r2
+FROM stock_prices)
+
+SELECT open_max.ticker AS ticker,
+       highest_mth,
+       open_max.open AS highest_open,
+       open_min.lowest_mth,
+       open_min.open AS lowest_open
+FROM open_max 
+JOIN open_min 
+ON open_max.ticker = open_min.ticker
+WHERE r1 = 1 AND r2 = 1 
+ORDER BY ticker ASC
